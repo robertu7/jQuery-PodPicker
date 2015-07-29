@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2015 RoberTu <robertu0717@gmail.com>
  * @license MIT
- * @version v0.1.0
+ * @version v0.1.1
  */
 
 // Uses CommonJS, AMD or browser globals to create a jQuery plugin.
@@ -179,6 +179,7 @@
                 : _createTimeline();
             }
         }, 10);
+        // Create timeline
         function _createTimeline() {
             var fragment = '<div id="pp-timeline"><ul style="color:' + options.timelineColor + '">';
             $.each(items, function (i, item) {
@@ -234,11 +235,7 @@
                 $('#pp-pointer').removeClass('seeking');
             });
         }
-
-        /**
-         * Set or Reset timeline pointer position
-         *
-         */
+        // Set or Reset timeline pointer position
         function _setPointerPosition(index) {
 
             // Store current item(Section) index
