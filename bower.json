@@ -1,0 +1,29 @@
+{
+  "name": "jquery-podpicker",
+  "description": "A Podcast Timeline Generator",
+  "authors": [
+    {
+      "name": "RoberTu",
+      "email": "robertu0717@gmail.com"
+    }
+  ],
+  "homepage": "https://github.com/RoberMac/jQuery-PodPicker",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/RoberMac/jQuery-PodPicker"
+  },
+  "main": [
+    "dist/jquery.podpicker.js",
+  ],
+  "keyword": [
+    "podcast",
+    "jquery-plugin"
+  ], 
+  "ignore": [
+    "node_modules",
+    ".gitignore",
+    "gulpfile.js",
+    "package.json"
+  ],
+  "licence": "MIT"
+}
