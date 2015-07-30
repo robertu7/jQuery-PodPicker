@@ -283,6 +283,7 @@ $.fn.createPodPicker = function (items, options) {
     return this;
 }
 
+
 /**
  * Remove Pod Picker
  * 
@@ -297,7 +298,7 @@ $.fn.removePodPicker = function (){
         $.error(msg)
     } else if (!$.fn._PodPicker.selector){
         $.error('Pod Picker: has not been created')
-    } 
+    }
 
     // Remove timeline
     $('#pp-timeline').remove()
@@ -311,6 +312,7 @@ $.fn.removePodPicker = function (){
 
     return this;
 }
+
 
 /**
  * Store Internal Data
