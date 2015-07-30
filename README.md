@@ -3,9 +3,9 @@
 *A Podcast Timeline Generator*
 
 ## Install
-  - NPM: `npm install jquery-podpicker`
-  - Bower: `bower install jquery-podpicker`
-  - jsDelivr: `//cdn.jsdelivr.net/jquery-podpicker/latest/jquery.podpicker.min.js` `//cdn.jsdelivr.net/jquery-podpicker/latest/PodPicker.min.css`
+  - NPM: `npm install jquery.podpicker`
+  - Bower: `bower install jquery.podpicker`
+  - [jsDelivr](http://www.jsdelivr.com/#!jquery.podpicker)
 
 ## Usage
 #### Getting Started
@@ -13,9 +13,9 @@
 ```html
 <head>
     ...
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery-podpicker/latest/PodPicker.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.podpicker/latest/PodPicker.min.css">
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery-podpicker/latest/jquery.podpicker.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.podpicker/latest/jquery.podpicker.min.js"></script>
 </head>
 ```
 
