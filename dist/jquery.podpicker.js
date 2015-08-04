@@ -8,7 +8,6 @@
  */
 
 // Uses CommonJS, AMD or browser globals to create a jQuery plugin.
-'use strict';
 
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
@@ -88,13 +87,10 @@
         switch (len) {
             case 1:
                 return timeArray[0] * 1;
-                break;
             case 2:
                 return timeArray[0] * 60 + timeArray[1] * 1;
-                break;
             case 3:
                 return timeArray[0] * 60 * 60 + timeArray[1] * 60 + timeArray[2] * 1;
-                break;
             default:
                 $.error(ERROR_MSG.start_format);
         }
@@ -138,8 +134,9 @@
         isUndefined(items) ? $.error(ERROR_MSG.items_param) : isArray(items) ? items.length <= 0 && $.error(ERROR_MSG.items_empty) : $.error(ERROR_MSG.items_type);
         // Sort items array by item object
         items = items.sort(function (pre, next) {
-            var pre = convertTime(pre.start),
-                next = convertTime(next.start);
+            pre = convertTime(pre.start);
+            next = convertTime(next.start);
+
             if (pre > next) {
                 return 1;
             } else if (pre < next) {
@@ -153,7 +150,7 @@
          * Set Options
          *
          */
-        var options = $.extend({}, {
+        options = $.extend({}, {
             audioElem: $('audio').get()[0],
             timelineColor: '#CECECF',
             isShowStartTime: false
@@ -195,11 +192,7 @@
             // then bind events
             _bindEvents();
         }
-
-        /**
-         * Bind Events
-         *
-         */
+        // Bind Events
         function _bindEvents() {
             $('.pp-item span').click(function () {
                 options.audioElem.play();
@@ -216,8 +209,7 @@
                 if (Math.abs(that.data('_preTime') - currentTime) > 1) {
                     // user-triggered
                     $.each(_startTimeSet, function (i) {
-                        _startTimeSet[i + 1] // the last one
-                        ? currentTime >= _startTimeSet[i] && currentTime <= _startTimeSet[i + 1] ? _setPointerPosition(i + 1) : null : currentTime >= _startTimeSet[i] ? _setPointerPosition(i + 1) : null;
+                        _startTimeSet[i + 1] ? currentTime >= _startTimeSet[i] && currentTime <= _startTimeSet[i + 1] ? _setPointerPosition(i + 1) : null : currentTime >= _startTimeSet[i] ? _setPointerPosition(i + 1) : null;
                     });
                 } else {
                     // auto-triggered
@@ -272,10 +264,6 @@
 
         // Remove timeline
         $('#pp-timeline').remove();
-
-        // Unbind Events
-        $('.pp-item').unbind();
-        $('audio').unbind();
 
         // Reset status
         $.fn._PodPicker.isCreated = false;

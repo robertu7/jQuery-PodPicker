@@ -25,7 +25,6 @@
 
 "use strict";
 
-
 /**
  * Determines if a value is `undefined / string / boolean / array / object / hex color / timeString`
  *
@@ -77,13 +76,10 @@ var convertTime = (timeString) => {
     switch (len){
         case 1: 
             return timeArray[0] * 1
-            break;
         case 2:
             return timeArray[0] * 60 + timeArray[1] * 1
-            break;
         case 3:
             return timeArray[0] * 60 * 60 + timeArray[1] * 60 + timeArray[2] * 1
-            break;
         default:
             $.error(ERROR_MSG.start_format)
     }
@@ -136,9 +132,10 @@ $.fn.createPodPicker = function (items, options) {
             ? items.length <= 0 && $.error(ERROR_MSG.items_empty)
             : $.error(ERROR_MSG.items_type)
     // Sort items array by item object
-    items = items.sort(function (pre, next){
-        var pre  = convertTime(pre.start),
-            next = convertTime(next.start);
+    items = items.sort( (pre, next) => {
+        pre  = convertTime(pre.start);
+        next = convertTime(next.start);
+
         if (pre > next){
             return 1;
         } else if (pre < next){
@@ -153,7 +150,7 @@ $.fn.createPodPicker = function (items, options) {
      * Set Options
      *
      */
-    var options = $.extend({}, {
+    options = $.extend({}, {
         audioElem      : $('audio').get()[0],
         timelineColor  : '#CECECF',
         isShowStartTime: false
@@ -177,7 +174,7 @@ $.fn.createPodPicker = function (items, options) {
      *
      */
     var that = this;
-    var currentSrcInterval = setInterval(function (){
+    var currentSrcInterval = setInterval( () => {
         var currentSrc = options.audioElem.currentSrc
         if (currentSrc){
             clearInterval(currentSrcInterval)
@@ -190,7 +187,7 @@ $.fn.createPodPicker = function (items, options) {
     // Create timeline
     function _createTimeline(){
         var fragment = '<div id="pp-timeline"><ul style="color:' + options.timelineColor + '">';
-        $.each(items, function (i, item){
+        $.each(items, (i, item) => {
             var start = convertTime(item.start),
                 title = options.isShowStartTime
                             ? item.start + ' - ' + item.title
@@ -205,30 +202,25 @@ $.fn.createPodPicker = function (items, options) {
         // then bind events
         _bindEvents()
     }
-
-
-    /**
-     * Bind Events
-     *
-     */
+    // Bind Events
     function _bindEvents(){
         $('.pp-item span').click(function (){
             options.audioElem.play()
             options.audioElem.currentTime = that.data('_startTimeSet')[$(this).parent().index()]
-            that.data('_seekingIndex', window.setTimeout(function (){
+            that.data('_seekingIndex', window.setTimeout( () => {
                 $('#pp-pointer').addClass('seeking')
             }, 500))
         })
         $(options.audioElem)
-        .bind('timeupdate', function (){
+        .bind('timeupdate', () => {
             var currentTime   = options.audioElem.currentTime,
                 _startTimeSet = that.data('_startTimeSet'),
                 len           = _startTimeSet.length;
 
             if (Math.abs(that.data('_preTime') - currentTime) > 1){
                 // user-triggered
-                $.each(_startTimeSet, function (i){
-                    _startTimeSet[i + 1] // the last one 
+                $.each(_startTimeSet, (i) => {
+                    _startTimeSet[i + 1]
                         ? currentTime >= _startTimeSet[i] && currentTime <= _startTimeSet[i + 1]
                             ? _setPointerPosition(i + 1)
                             : null
@@ -238,7 +230,7 @@ $.fn.createPodPicker = function (items, options) {
                 })
             } else {
                 // auto-triggered
-                $.each(_startTimeSet, function (i){
+                $.each(_startTimeSet, (i) => {
                     currentTime > _startTimeSet[i] - 1 
                      && currentTime <= _startTimeSet[i] + 1 
                      && that.data('_itemsIndex') !== i + 1
@@ -249,10 +241,10 @@ $.fn.createPodPicker = function (items, options) {
 
             that.data('_preTime', currentTime)
         })
-        .bind('seeking', function (){
+        .bind('seeking', () => {
             options.audioElem.pause()
         })
-        .bind('seeked', function (){
+        .bind('seeked', () => {
             window.clearTimeout(that.data('_seekingIndex'))
             options.audioElem.play()
             $('#pp-pointer').removeClass('seeking')
@@ -267,7 +259,7 @@ $.fn.createPodPicker = function (items, options) {
 
         // Set timeline section style
         item.eq(index - 1).children().addClass('currentSection')
-        $.each(item, function (i){
+        $.each(item, (i) => {
             i !== index - 1
                 ? item.eq(i).children().removeClass('currentSection')
                 : null
@@ -302,10 +294,6 @@ $.fn.removePodPicker = function (){
 
     // Remove timeline
     $('#pp-timeline').remove()
-
-    // Unbind Events
-    $('.pp-item').unbind()
-    $('audio').unbind()
 
     // Reset status
     $.fn._PodPicker.isCreated = false
